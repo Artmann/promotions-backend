@@ -12,7 +12,7 @@ GET https://promotions-backend.herokuapp.com/games/game1/promotions
 
 Response
 
-```
+```json
 {
   "promotions": [
     {
@@ -37,7 +37,7 @@ POST https://promotions-backend.herokuapp.com/games/game1/promotions
 
 Request
 
-```
+```json
 {
   "title": "Promotion 3",
   "startsAt": "2022-02-18T12:22:56+0000",
@@ -47,7 +47,7 @@ Request
 
 Response
 
-```
+```json
 {
   "promotion": {
     "id": 1,
