@@ -1,4 +1,5 @@
 import { PrismaClient, Promotion } from '@prisma/client'
+import cors from 'cors'
 import express, { Request, Response } from 'express'
 import moment from 'moment'
 
@@ -8,6 +9,7 @@ const app = express()
 const port = Number(process.env.PORT || '3000')
 
 app
+    .use(cors())
     .use(express.json())
 
 app.get('/', (request: Request, response: Response) => {
