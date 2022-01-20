@@ -31,7 +31,7 @@ app.get('/games/:gameId/promotions', async (request: Request, response: Response
 })
 
 app.post('/games/:gameId/promotions', async (request: Request, response: Response) => {
-    const { gameId,  } = request.params
+    const { gameId } = request.params
     const { title, startsAt, endsAt } = request.body
 
     if (!title) {
@@ -53,6 +53,48 @@ app.post('/games/:gameId/promotions', async (request: Request, response: Respons
             startsAt: moment(startsAt).toDate(),
             title
         }
+    })
+
+    response.json({
+        promotion: transformPromotion(promotion)
+    })
+})
+
+app.patch('/games/:gameId/promotions/:id', async (request: Request, response: Response) => {
+    const { gameId } = request.params
+    const { title, startsAt, endsAt } = request.body
+
+    const id = Number(request.params.id)
+
+    if (!id) {
+        throw new Error('Promotion not found.')
+    }
+
+    const doesExist = !!(await prisma.promotion.findFirst({
+        where: { id }
+    }))
+
+    if (!doesExist) {
+        throw new Error('Promotion not found.')
+    }
+
+    const changes: Record<string, string> = {}
+
+    if (title) {
+        changes.title = title
+    }
+
+    if (startsAt) {
+        changes.startsAt = startsAt
+    }
+
+    if (endsAt) {
+        changes.endsAt = endsAt
+    }
+
+    const promotion = await prisma.promotion.update({
+        where: { id },
+        data: changes
     })
 
     response.json({

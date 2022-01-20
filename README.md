@@ -4,7 +4,7 @@ A demo backend service that handles promotions.
 
 ### List Promotions
 
-URL 
+URL
 
 ```
 GET https://promotions-backend.herokuapp.com/games/game1/promotions
@@ -29,7 +29,7 @@ Response
 ### Create Promotion
 
 
-URL 
+URL
 
 ```
 POST https://promotions-backend.herokuapp.com/games/game1/promotions
@@ -59,12 +59,43 @@ Response
 }
 ```
 
+### Update Promotion
+
+
+URL
+
+```
+POST https://promotions-backend.herokuapp.com/games/game1/promotions/1
+```
+
+Request
+
+```json
+{
+  "title": "Fall Promotion"
+}
+```
+
+Response
+
+```json
+{
+  "promotion": {
+    "id": 1,
+    "gameId": "game1",
+    "title": "Fall Promotion",
+    "startsAt": "2022-02-18T12:22:56.000Z",
+    "endsAt": "2022-04-18T12:22:56.000Z"
+  }
+}
+```
+
 ## Run it localy
 
 Run Postgres in Docker
 
 ```sh
-docker run --name postgresql-container -p 5432:5432 -e POSTGRES_PASSWORD=foobar123 -d postgres
+docker run -it -d -p 5432:5432 -e POSTGRES_PASSWORD=foobar123 postgres
 ```
 
 Migrate the database
