@@ -30,6 +30,28 @@ app.get('/games/:gameId/promotions', async (request: Request, response: Response
     })
 })
 
+app.get('/games/:gameId/promotions/:id', async (request: Request, response: Response) => {
+    const { gameId } = request.params
+
+    const id = Number(request.params.id)
+
+    if (!id) {
+        return response.status(404).json({ error: 'Promotion not found.' })
+    }
+
+    const promotion = await prisma.promotion.findFirst({
+        where: { id }
+    })
+
+    if (!promotion) {
+        return response.status(404).json({ error: 'Promotion not found.' })
+    }
+
+    response.json({
+        promotion: transformPromotion(promotion)
+    })
+})
+
 app.post('/games/:gameId/promotions', async (request: Request, response: Response) => {
     const { gameId } = request.params
     const { title, startsAt, endsAt } = request.body

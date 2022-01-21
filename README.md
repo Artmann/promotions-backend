@@ -26,6 +26,29 @@ Response
 }
 ```
 
+### Show Promotion
+
+URL
+
+```
+GET https://promotions-backend.herokuapp.com/games/game1/promotions/:id
+```
+
+Response
+
+```json
+{
+  "promotion": {
+    "id": 1,
+    "gameId": "game1",
+    "title": "Promotion 3",
+    "startsAt": "2022-02-18T12:22:56.000Z",
+    "endsAt": "2022-04-18T12:22:56.000Z"
+  }
+}
+```
+
+
 ### Create Promotion
 
 
@@ -65,7 +88,7 @@ Response
 URL
 
 ```
-POST https://promotions-backend.herokuapp.com/games/game1/promotions/1
+PATCH https://promotions-backend.herokuapp.com/games/game1/promotions/1
 ```
 
 Request
